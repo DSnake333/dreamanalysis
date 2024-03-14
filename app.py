@@ -14,6 +14,7 @@ from flask_sqlalchemy import SQLAlchemy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import re
 import json
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dreams.db'
@@ -42,6 +43,10 @@ nlp = spacy.load("en_core_web_md")
 ruler = nlp.add_pipe("entity_ruler", before="ner", config={"overwrite_ents": True})
 ruler.add_patterns(patterns)
 
+def create_wordclouds_folder():
+    folder_path = os.path.join(app.static_folder, "wordclouds")
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
 def analyze_sentiment(text):
     sentences = re.split(r'[.!?]', text)
     analyzer = SentimentIntensityAnalyzer()
@@ -418,6 +423,7 @@ def view_dream(index):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # Create new tables
+        create_wordclouds_folder()  # Create wordclouds folder if it doesn't exist
     app.run(debug=True)
 
 @app.teardown_appcontext
