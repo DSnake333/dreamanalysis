@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>Dream Analysis Result</title>
+</head>
+
+<body id="main-body">
+    <div class="container">
+        <nav id="tabs">
+            <a href="#summary" class="tab" onclick="showTab('summary')">Summary</a>
+            <a href="#sentiment" class="tab" onclick="showTab('sentiment')">Sentiment</a>
+            <a href="#sleep" class="tab" onclick="showTab('sleep')">Sleep</a>
+            <a href="#interpretation" class="tab" onclick="showTab('interpretation')">Interpretation</a>
+            <a href="#symbolism" class="tab" onclick="showTab('symbolism')">Dream Symbolism</a>
+            <a href="#guidance" class="tab" onclick="showTab('guidance')">User Guidance</a>
+            <a href="#analysis" class="tab" onclick="showTab('analysis')">Detailed Analysis</a>
+            <a href="#wordcloud" class="tab" onclick="showTab('wordcloud')">Word Cloud</a>
+            <a href="{{ url_for('landing') }}" class="home-button">
+                <i class="fas fa-home fa-lg"></i>
+            </a>
+        </nav>
+        <div id="content-wrapper">
+            <div class="results-container">
+                <!-- Summary Section -->
+                <section id="summary" class="result-section active">
+                    <h2>Summary</h2>
+                    <dl>
+                        {% if sentiment %}
+                            <dt>Sentiment</dt>
+                            <dd>{{ sentiment }}</dd>
+                            {% if emotion_distribution_pie_chart_path %}
+                                <img src="{{ url_for('static', filename=emotion_distribution_pie_chart_path) }}" alt="Emotion Distribution Pie Chart" class="chart-image">
+                            {% endif %}
+                        {% endif %}
+                        {% if sleep_duration %}
+                            <dt>Sleep Duration</dt>
+                            <dd>{{ sleep_duration }} minutes</dd>
+                        {% endif %}
+                        {% if sleep_quality %}
+                            <dt>Sleep Quality</dt>
+                            <dd>{{ sleep_quality }}/10</dd>
+                        {% endif %}
+                        {% if sleep_stage %}
+                            <dt>Sleep Stage</dt>
+                            <dd>{{ sleep_stage }}</dd>
+                        {% endif %}
+                    </dl>
+                </section>
+
+                <!-- Additional Sections -->
+                <section id="sentiment" class="result-section">
+                    <h2>Sentiment</h2>
+                    <p>{{ sentiment }}</p>
+                </section>
+
+                <section id="sleep" class="result-section">
+                    <h2>Sleep</h2>
+                    <dl>
+                        {% if sleep_duration %}
+                            <dt>Sleep Duration</dt>
+                            <dd>{{ sleep_duration }} minutes</dd>
+                        {% endif %}
+                        {% if sleep_quality %}
+                            <dt>Sleep Quality</dt>
+                            <dd>{{ sleep_quality }}/10</dd>
+                        {% endif %}
+                        {% if sleep_stage %}
+                            <dt>Sleep Stage</dt>
+                            <dd>{{ sleep_stage }}</dd>
+                        {% endif %}
+                    </dl>
+                </section>
+
+                <section id="interpretation" class="result-section">
+                    <h2>Interpretation</h2>
+                    <p>{{ interpretation | safe }}</p>
+                </section>
+
+
+                <section id="symbolism" class="result-section">
+                    <h2>Dream Symbolism</h2>
+                    <p>{{ dream_symbolism_result | safe }}</p>
+                </section>
+
+                <section id="guidance" class="result-section">
+                    <h2>User Guidance</h2>
+                    <p>{{ user_guidance | safe }}</p>
+                </section>
+
+                <section id="wordcloud" class="result-section">
+                    <h2>Word Cloud</h2>
+                    {% if word_cloud_image_path %}
+                        <div class="word-cloud">
+                            <img src="{{ url_for('static', filename=word_cloud_image_path) }}" alt="Word Cloud">
+                        </div>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function adjustTabHeight() {
+            var activeSection = document.querySelector('.result-section.active');
+
+            // Remove adjustments to activeSection and container heights
+            activeSection.style.height = 'auto';
+        }
+
+        function showTab(tabName) {
+            var sections = document.querySelectorAll('.result-section');
+            sections.forEach(function (section) {
+                section.classList.remove('active');
+            });
+
+            var selectedSection = document.getElementById(tabName);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+                selectedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Adjust scroll position for fixed header
+                var headerHeight = document.querySelector('header').offsetHeight;
+                window.scrollBy(0, -headerHeight);
+
+                adjustTabHeight();
+            }
+        }
+
+        // Call adjustTabHeight() on window resize
+        window.addEventListener('resize', adjustTabHeight);
+
+        // Call adjustTabHeight() on page load
+        window.addEventListener('load', function () {
+            showTab('summary');
+            adjustTabHeight();
+        });
+    </script>
+
+    <script>
+        // Updated JavaScript for background color change
+        function updateBackgroundColor(sentiment) {
+            var body = document.getElementById('main-body');
+            var color;
+
+            if (sentiment === 'Positive') {
+                color = '#4CAF50'; // Green
+            } else if (sentiment === 'Negative') {
+                color = '#FF5733'; // Red
+            } else {
+                color = '#7F8C8D'; // Gray
+            }
+
+            body.style.transition = 'background 0.7s ease';  // Updated transition property
+            body.style.background = `linear-gradient(45deg, ${lightenColor(color, 20)}, ${darkenColor(color, 20)})`;
+
+            // Use setTimeout to remove the transition property after the animation
+            setTimeout(function () {
+                body.style.transition = '';
+            }, 700);
+        }
+
+        // Function to darken a color
+        function darkenColor(color, percent) {
+            // Ensure the provided color is in the format #RRGGBB
+            color = color.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => (
+                '#' + r + r + g + g + b + b
+            ));
+
+            // Convert the hexadecimal color to RGB
+            const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+            const r = parseInt(rgb[1], 16);
+            const g = parseInt(rgb[2], 16);
+            const b = parseInt(rgb[3], 16);
+
+            // Darken the color by the specified percentage
+            const factor = 1 - percent / 100;
+            const darkenedR = Math.floor(r * factor);
+            const darkenedG = Math.floor(g * factor);
+            const darkenedB = Math.floor(b * factor);
+
+            // Convert the darkened RGB values back to hexadecimal and return the result
+            return `#${(darkenedR << 16 | darkenedG << 8 | darkenedB).toString(16).padStart(6, '0')}`;
+        }
+
+        // Function to lighten a color
+        function lightenColor(color, percent) {
+            // Ensure the provided color is in the format #RRGGBB
+            color = color.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => (
+                '#' + r + r + g + g + b + b
+            ));
+
+            // Convert the hexadecimal color to RGB
+            const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+            const r = parseInt(rgb[1], 16);
+            const g = parseInt(rgb[2], 16);
+            const b = parseInt(rgb[3], 16);
+
+            // Lighten the color by the specified percentage
+            const factor = percent / 100;
+            const lightenedR = Math.min(255, Math.floor(r + (255 - r) * factor));
+            const lightenedG = Math.min(255, Math.floor(g + (255 - g) * factor));
+            const lightenedB = Math.min(255, Math.floor(b + (255 - b) * factor));
+
+            // Convert the lightened RGB values back to hexadecimal and return the result
+            return `#${(lightenedR << 16 | lightenedG << 8 | lightenedB).toString(16).padStart(6, '0')}`;
+        }
+            document.addEventListener('DOMContentLoaded', function () {
+                var sentiment = "{{ sentiment }}";
+                updateBackgroundColor(sentiment);
+            });
+    </script>
+
+    <div id="particle-animation-container"></div>
+
+    <!-- Particle.js Initialization Script -->
+    <script>
+        particlesJS('particle-animation-container', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                opacity: { value: 0.7, anim: { enable: false } },
+                size: { value: 2, random: true, anim: { enable: false } },
+                line_linked: { enable: true, distance: 100, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false } },
+            },
+            interactivity: { detect_on: 'canvas', events: { onhover: { enable: false }, onclick: { enable: false }, resize: true } },
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Dream Analysis Tool</title>
+    <style>
+    body {
+        background-attachment: fixed;
+    }
+    </style>
+</head>
+
+<body id="main-body" class="dark-mode">
+
+    <div class="dark-mode-switch-container">
+        <div class="dark-mode-switch">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+                <span class="icons">
+                    <span class="icon sun">&#9728;</span> <!-- Sun symbol -->
+                    <span class="icon moon">&#9790;</span> <!-- Moon symbol -->
+                </span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Dream Journal Section -->
+    <section id="dream-journal" class="dream-journal">
+        <div class="container">
+            <h2 class="section-title">Dream Journal</h2>
+            {% if dream_journal %}
+                <ul class="dream-list">
+                    {% for dream_entry in dream_journal %}
+                        <li class="dream-entry">
+                            <strong>{{ dream_entry.timestamp }}</strong><br>
+                            Sentiment: {{ dream_entry.sentiment }}<br>
+                            Entities: {{ dream_entry.entities }}<br>
+                            Topics: {{ dream_entry.topics }}<br>
+                            Keywords: {{ dream_entry.keywords }}<br>
+                            Sleep Duration: {{ dream_entry.sleep_duration }} minutes<br>
+                            Sleep Quality: {{ dream_entry.sleep_quality }}/10<br>
+                            <a href="{{ url_for('view_dream', index=dream_entry.id-1) }}">View Details</a>
+                            <form method="post" action="{{ url_for('delete_dream', index=dream_entry.id-1) }}"
+                                style="display: inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No dream entries yet.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Check if the user has a preference stored in localStorage
+        var isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+
+        // Apply the stored preference
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        darkModeToggle.checked = isDarkMode;
+
+        // Check and update button state immediately
+        updateButtonState();
+
+        // Update background image based on the initial mode
+        updateBackgroundImage(isDarkMode);
+
+        darkModeToggle.addEventListener('change', function () {
+            // Toggle the dark mode class on the body
+            document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+
+            // Store the user's preference in localStorage
+            localStorage.setItem('darkMode', darkModeToggle.checked ? 'enabled' : 'disabled');
+
+            // Update button state after the change
+            updateButtonState();
+
+            // Update background image based on the current mode
+            updateBackgroundImage(darkModeToggle.checked);
+        });
+
+        // Add an event listener for the pageshow event
+        window.addEventListener('pageshow', function (event) {
+            // Check if the user has a preference stored in localStorage
+            var isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+
+            // Apply the stored preference
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            darkModeToggle.checked = isDarkMode;
+
+            // Update button state after the pageshow event
+            updateButtonState();
+
+            // Update background image based on the current mode
+            updateBackgroundImage(isDarkMode);
+        });
+
+        function updateButtonState() {
+            // Update button state based on the current dark mode setting
+            if (darkModeToggle.checked) {
+                darkModeToggle.parentElement.querySelector('.icon.sun').style.color = '';
+                darkModeToggle.parentElement.querySelector('.icon.moon').style.color = 'white';
+            } else {
+                darkModeToggle.parentElement.querySelector('.icon.sun').style.color = 'white';
+                darkModeToggle.parentElement.querySelector('.icon.moon').style.color = '';
+            }
+        }
+
+        function updateBackgroundImage(isDarkMode) {
+            var body = document.getElementById('main-body');
+            var backgroundImageUrl = isDarkMode ? 'static/images/dark.png' : 'static/images/light.png';
+            body.style.transition = 'background-image 0.7s ease';
+
+            // Get the mouse coordinates
+            const mouseX = event.clientX / window.innerWidth - 1.0;
+            const mouseY = event.clientY / window.innerHeight - 1.0;
+
+            // Change the background image with a delay to allow the transition effect
+            setTimeout(function () {
+                body.style.backgroundImage = 'url("' + backgroundImageUrl + '")';
+                body.style.backgroundSize = '120%';
+                body.style.backgroundPositionX = `${mouseX * 20}px`;
+                body.style.backgroundPositionY = `${mouseY * 20}px`;
+            }, 50);
+
+            // Remove transition effect after the transition completes
+            setTimeout(function () {
+                body.style.transition = '';
+            }, 500);
+        }
+
+    });
+    </script>
+
+
+    <script>
+    document.addEventListener('mousemove', function (e) {
+        // Get the mouse coordinates
+        const mouseX = e.clientX / window.innerWidth - 1.0;
+        const mouseY = e.clientY / window.innerHeight - 1.0; // Adjust this value
+
+        // Set the background position based on the mouse movement
+        document.body.style.backgroundPositionX = `${mouseX * 20}px`;
+        document.body.style.backgroundPositionY = `${mouseY * 20}px`;
+    });
+
+    </script>
+</body>
+
+</html>

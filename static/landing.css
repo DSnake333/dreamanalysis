@@ -1,0 +1,245 @@
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    overflow: hidden;
+}
+
+a {
+    color: #fff; /* Tomato color */
+    text-decoration: none; /* Removes underline */
+    font-weight: light; /* Makes text bold */
+    font-size: 0.8em;
+}
+
+a:hover {
+    color: #008000; /* Green color on mouse-over */
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+    background-color: #05131b;
+}
+
+#section1 {
+    background: url('../static/images/bg.png'); no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+#section2 {
+    background: #05131b;
+}
+
+button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* No border */
+    color: white; /* White text */
+    padding: 15px 122px; /* Padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* No underline */
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 22px;
+    transition-duration: 0.4s; /* Transition effect */
+    cursor: pointer;
+    border-radius: 25px; /* Rounded corners */
+}
+
+button:hover {
+    background-color: white; /* White background on mouse-over */
+    color: black; /* Black text on mouse-over */
+}
+.top-center-box {
+    position: absolute;
+    top: -15px;
+    left: 3%;
+    transform: translateX(-50%);
+    background-color: transparent; /* Green background */
+    color: white; /* White text */
+    font-size: 14px;
+    padding: 30px 0px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1;
+}
+/* Existing CSS styles for cards */
+.card-container {
+    display: flex;
+    justify-content: space-around; /* Evenly space items */
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+}
+
+.card {
+    width: calc(33.33% - 40px); /* Adjusted to fit three cards horizontally with spacing */
+    max-width: 500px; /* Maximum width for each card */
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: black;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+.card h2 {
+    margin: 20px 0 10px; /* Adjust top and bottom margin */
+    font-size: 2.5rem; /* Decrease font size */
+    font-weight: 800; /* Decrease font weight */
+}
+
+.card p {
+    margin-bottom: 0px; /* Add space between paragraphs */
+    font-size: 1.5rem; /* Decrease font size */
+    font-weight: 100; /* Decrease font weight */
+}
+
+/* Additional CSS for card images */
+.card img {
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* Additional CSS for card text */
+.card-text {
+    padding: 50px;
+    flex-grow: 1; /* Allow text to expand to fill remaining space */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(135, 245, 160, 0.5); /* Adjusted color and opacity */
+}
+
+#section3 {
+    text-align: center;
+    padding: 50px 0;
+}
+
+#section3 h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+#section3 p {
+    font-size: 26px;
+    color: #666;
+}
+.carousel {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow-x: auto;
+}
+.carousel img {
+  width: 150px;
+  height: 150px;
+  margin: 25px;
+  object-fit: contain;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+#section3 {
+    text-align: center;
+    padding: 0px 200px;
+    background-color: #05131b; /* Add background color */
+}
+
+#section3 h2 {
+    margin-top: 100px;
+    color: white;
+    font-size: 2.5rem; /* Increase font size */
+}
+
+#section3 p {
+    font-size: 1.5rem;
+    color: #ccc; /* Lighten text color */
+    max-width: 800px; /* Limit width of paragraph */
+    margin: 0 auto 20px; /* Center paragraph and add bottom margin */
+}
+
+.cta {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 40px; /* Adjust padding */
+    font-size: 20px; /* Decrease font size */
+    border-radius: 25px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.cta:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.social-proof {
+    margin-top: 30px; /* Add space above social proof */
+}
+#contact-popup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px; /* Increased padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 80%; /* Set a maximum width to ensure it doesn’t get too large on wide screens */
+    max-width: 500px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Add a border */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 20px; /* Increased padding */
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    color: black;
+    font-family: Arial, sans-serif; /* Use a clean, professional font */
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Style the input fields for a cleaner look */
+input[type=text], input[type=email], textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Style the submit button to make it stand out more and be more inviting to click*/
+input[type=submit] {
+   background-color: #4CAF50;
+   color:white;
+   padding:10px 20px;
+   border:none;
+   border-radius :5px ;
+}
+
+.close {
+    position: absolute;
+    top: 0; /* Reduced top property to 0 */
+    right: 0; /* Reduced right property to 0 */
+    cursor: pointer;
+    padding: 10px; /* Added padding to offset the close button from the edge */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

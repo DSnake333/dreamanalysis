@@ -1,0 +1,525 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    transition: background-color 0.7s ease, color 0.7s ease;
+    transition: background-position 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.dream-form h2.section-title {
+    margin-top: 80px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 18px;
+}
+
+/* Add classes to your headings for styling */
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* Navigation Styles */
+.navbar {
+    background-color: #343a40;
+    color: #fff;
+    padding: 15px 0;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure consistency in selector naming convention */
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffc107; /* Change to your preferred hover color */
+}
+
+/* Hero Section Styles */
+.hero {
+    background-color: #007bff;
+    color: #fff;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    position: fixed; /* Ensure the menu button stays fixed */
+    z-index: 2; /* Ensure the button is above other elements */
+    top: 20px; /* Adjust the top position as needed */
+    left: 20px; /* Adjust the left position as needed */
+}
+
+.line {
+    width: 20px;
+    height: 2px;
+    background-color: #000000;
+    margin: 2px 0;
+    border: 1px solid #ffffff; /* Set border to white */
+}
+
+/* Left Panel Styles */
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Set initial left position outside the viewport */
+    width: 300px; /* Adjust the width as needed */
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 60px;
+    overflow-x: hidden;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure the left panel is above other elements */
+}
+
+.left-panel-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.left-panel-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.3s ease;
+    background-color: #007bff;
+}
+
+.left-panel-nav a:hover {
+    background-color: #007bff;
+}
+
+/* Simplify transition properties */
+.btn,
+.button-animation,
+.submit-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover,
+.button-animation:hover,
+.submit-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dream Entry Form Styles */
+.dream-entry {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    background-color: rgba(255,255,255, 0.4); /* Adjust the last parameter (opacity) as needed */
+}
+
+.dark-mode .dream-entry {
+    background-color: rgba(0, 0, 0, 0.2); /* Adjust the last parameter (opacity) as needed */
+}
+
+.dream-entry:hover {
+    transform: scale(1.03);
+}
+
+.dream-entry a:hover {
+    text-decoration: underline;
+}
+
+.dream-entry strong {
+    font-weight: 600;
+}
+
+/* Dream Journal Section Styles */
+.dream-journal {
+    padding: 80px 20px;
+    text-align: left;
+    color: #333;
+    transition: background-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dream-journal::before {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .btn,
+    .button-animation,
+    .submit-btn {
+        font-size: 16px;
+    }
+}
+
+.dream-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Input field styling */
+.input-field {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* Adjust border color */
+    border-radius: 5px;
+    font-size: 18px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: none;
+}
+
+.input-field.custom-textarea {
+    height: 150px; /* Set the desired height */
+    /* Add any other styles specific to this textarea */
+}
+
+.input-checkbox {
+    margin-top: 10px;
+    transform: translateY(-50%);
+}
+.input-checkbox:hover {
+    cursor: pointer;
+}
+/* Adjust the form animation */
+#dreamEntryForm,
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Add hover effect for input fields */
+.input-field:hover {
+    border-color: #007bff;
+}
+
+/* Add focus effect for input fields */
+.input-field:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Add transition for submit button */
+.submit-btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Form animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark Mode Switch Styles */
+
+.dark-mode-switch-container {
+    position: fixed;
+    padding-top: 20px;
+    top: 10px;
+    right: 10px; /* Adjust the right distance as needed */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Ensure content is aligned to the end (right) */
+    z-index: 1000; /* Ensure it's above other elements */
+    transition: color 0.7s ease;
+}
+
+.dark-mode-switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    transition: color 0.7s ease;
+}
+
+.dark-mode-switch .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    transition: color 0.7s ease;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Dark Mode Switch Label */
+.mode-label {
+    margin-left: 10px;
+    color: #333;
+    font-size: 14px; /* Adjust the font size as needed */
+}
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+.dark-mode .line {
+    background-color: #fff; /* Change to your preferred color in dark mode */
+}
+.dark-mode-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+.dark-mode-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.dark-mode-switch .icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+}
+
+.dark-mode-switch .icon {
+    font-size: 18px; /* Adjust the font size as needed */
+    margin: 0 5px; /* Adjust the spacing between the icons and the switch */
+    color: white; /* Set the color of the icons */
+}
+
+.dark-mode-switch input {
+    display: none;
+}
+
+.dark-mode-switch input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.dark-mode-switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6,
+.dark-mode body {
+    color: #fff; /* Set the text color to white or your preferred color in dark mode */
+}
+
+.dark-mode .dream-entry a,
+.dark-mode .footer {
+    color: #ffc107; /* Set the color for links and footer in dark mode */
+}
+
+.dark-mode .dream-list,
+.dark-mode .dream-entry {
+    color: #fff; /* Set the text color for dream list and entries in dark mode */
+}
+
+.dark-mode .dream-list a {
+    color: #ffc107; /* Set the color for links in dream list in dark mode */
+}
+.dark-mode input-field {
+    color: #013b35; /* Set the text color to white or your preferred color in dark mode */
+}
